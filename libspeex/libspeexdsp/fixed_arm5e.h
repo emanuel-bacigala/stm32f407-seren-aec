@@ -71,7 +71,7 @@ static inline spx_word32_t MAC16_32_Q15(spx_word32_t a, spx_word16_t x, spx_word
   return(res);
 }
 
-
+/*
 #undef DIV32_16
 static inline short DIV32_16(int a, int b)
 {
@@ -154,7 +154,7 @@ static inline short DIV32_16(int a, int b)
                         );
    return res;
 }
-
+*/
 
 
 

@@ -47,7 +47,7 @@ static inline spx_word32_t MULT16_32_Q15(spx_word16_t x, spx_word32_t y) {
    : "r"(y),"r"((int)x));
   return(res);
 }
-
+/*
 #undef DIV32_16
 static inline short DIV32_16(int a, int b)
 {
@@ -130,6 +130,6 @@ static inline short DIV32_16(int a, int b)
                         );
    return res;
 }
-
+*/
 
 #endif

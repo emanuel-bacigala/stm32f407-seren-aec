@@ -179,9 +179,11 @@ struct SpeexEchoState_ {
    spx_mem_t *notch_mem;
 
    /* NOTE: If you only use speex_echo_cancel() and want to save some memory, remove this */
+#if 0
    spx_int16_t *play_buf;
    int play_buf_pos;
    int play_buf_started;
+#endif
 };
 
 static inline void filter_dc_notch16(const spx_int16_t *in, spx_word16_t radius, spx_word16_t *out, int len, spx_mem_t *mem, int stride)
@@ -513,9 +515,11 @@ EXPORT SpeexEchoState *speex_echo_state_init_mc(int frame_size, int filter_lengt
    st->Dvar1 = st->Dvar2 = FLOAT_ZERO;
 #endif
 
+#if 0
    st->play_buf = (spx_int16_t*)speex_alloc(K*(PLAYBACK_DELAY+1)*st->frame_size*sizeof(spx_int16_t));
    st->play_buf_pos = PLAYBACK_DELAY*st->frame_size;
    st->play_buf_started = 0;
+#endif
 
    return st;
 }
@@ -572,10 +576,13 @@ EXPORT void speex_echo_state_reset(SpeexEchoState *st)
    st->Davg1 = st->Davg2 = 0;
    st->Dvar1 = st->Dvar2 = FLOAT_ZERO;
 #endif
+
+#if 0
    for (i=0;i<3*st->frame_size;i++)
       st->play_buf[i] = 0;
    st->play_buf_pos = PLAYBACK_DELAY*st->frame_size;
    st->play_buf_started = 0;
+#endif
 
 }
 
@@ -616,7 +623,10 @@ EXPORT void speex_echo_state_destroy(SpeexEchoState *st)
    speex_free(st->memE);
    speex_free(st->notch_mem);
 
+#if 0
    speex_free(st->play_buf);
+#endif
+
    speex_free(st);
 
 #ifdef DUMP_ECHO_CANCEL_DATA
@@ -627,6 +637,7 @@ EXPORT void speex_echo_state_destroy(SpeexEchoState *st)
 #endif
 }
 
+#if 0
 EXPORT void speex_echo_capture(SpeexEchoState *st, const spx_int16_t *rec, spx_int16_t *out)
 {
    int i;
@@ -675,6 +686,7 @@ EXPORT void speex_echo_playback(SpeexEchoState *st, const spx_int16_t *play)
       speex_warning("Had to discard a playback frame (your application is buggy and/or got xruns)");
    }
 }
+#endif
 
 /** Performs echo cancellation on a frame (deprecated, last arg now ignored) */
 EXPORT void speex_echo_cancel(SpeexEchoState *st, const spx_int16_t *in, const spx_int16_t *far_end, spx_int16_t *out, spx_int32_t *Yout)
