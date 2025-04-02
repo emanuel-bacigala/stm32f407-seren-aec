@@ -32,3 +32,5 @@ Run instructions:
 1. run seren and select CLEAR mode(/e 0) at some other computer (for example: ./seren -p 4321 -d plughw -D plughw -vvv)
 2. call STM32F407 (/c 192.168.12.6 4321)
 3. enjoy the echo free call:)
+
+This project is licensed under the GNU General Public License v3.0. See COPYING for details.
