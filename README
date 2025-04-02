@@ -1,0 +1,35 @@
+This is the proof of concept that STM32F407 discovery board can serve as Seren simple VoIP client even with speex echo cancelation.
+Opus codec is used to encode/decode microphone/speaker PCM data. 
+
+LAN8720 wiring:
+PC1     -> ETH_MDC
+PA1     -> ETH_REF_CLK
+PA2     -> ETH_MDIO
+PA7     -> ETH_CRS_DV
+PC4     -> ETH_RXD0
+PC5     -> ETH_RXD1
+PB11    -> ETH_TX_EN
+PB12    -> ETH_TXD0
+PB13    -> ETH_TXD1
+PD12-15 -> LEDs (green, yellow, red, blue)
+PA0     -> BUTTON
+
+Blue LED                 -> echo canceletion is enabled.
+Green, Ornange, Red LEDs -> speaker buffer state (Green: OK, Orange: near underrun, Red: underrun)
+
+STM32F407 discovery board MP45DT02 microphone will be used but you have to connect some speaker with 3.5mm jack.
+F407 disco board is listening at 192.168.12.6:4321. Incomming call from seren client is automaticaly accepted. User button can be used to disable/enable echo cancellation.
+
+Build instructions:
+1. install gcc-arm-none-eabi and stm-utils
+2. build networking: cd networking; make
+3. build opus: cd opus; make
+5. build libspeexdsp: cd libspeex; make
+5. copy libarm_cortexM4lf_math.a library from ST-CUBE to project root dir (Reason? I'am not sure about the license)
+6. make
+7. burn reulting image: st-flash write build/f407_discovery_project_example.bin 0x8000000
+
+Run instructions:
+1. run seren and select CLEAR mode(/e 0) at some other computer
+2. call STM32F407 (/c 192.168.12.6 4321)
+3. enjoy the echo free call:)
