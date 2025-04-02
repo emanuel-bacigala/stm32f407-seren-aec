@@ -1,5 +1,4 @@
-This is the proof of concept that STM32F407 discovery board can serve as Seren simple VoIP client even with speex echo cancelation.
-Opus codec is used to encode/decode microphone/speaker PCM data. 
+This is the proof of concept that STM32F407 discovery board can serve as Seren simple VoIP client even with speex echo cancelation. Opus codec is used to encode/decode microphone/speaker PCM data. 
 
 LAN8720 wiring:
 PC1     -> ETH_MDC
